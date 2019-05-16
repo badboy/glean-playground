@@ -1,0 +1,10 @@
+[package]
+name = "glean-playground"
+version = "0.1.0"
+authors = ["Jan-Erik Rediger <janerik@fnordig.de>"]
+edition = "2018"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.39"
+bincode = "1.1.4"
