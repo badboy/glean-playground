@@ -4,20 +4,20 @@ use serde_json::{json, Value as JsonValue};
 mod counter;
 mod string;
 
-pub use self::counter::CounterMetric;
-pub use self::string::StringMetric;
+pub use self::counter::*;
+pub use self::string::*;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum Metric {
-    Counter(u64),
-    String(String),
+    Counter(Counter),
+    String(Str),
 }
 
 impl Metric {
     pub fn category(&self) -> &'static str {
         match self {
-            Metric::Counter(_) => "counter",
-            Metric::String(_) => "string",
+            Metric::Counter(c) => c.category(),
+            Metric::String(s) => s.category(),
         }
     }
 

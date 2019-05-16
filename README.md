@@ -1,33 +1,35 @@
 # Glean Playground
 
-## Metric Implementations - Current solution
+## Metric Implementations - Alternative solution
 
 
-* Recording implementation per metric
+* Recording implementation per metric AND metric store (2 types!)
     * Impl
         * [Counter](src/metrics/counter.rs)
         * [String](src/metrics/string.rs)
-    * Holds the common metric data
-    * Stores into the Glean storage
-    * Only knows about `Metrics` enum for serialization
-* Storage: `Metric` enum
+    * Recording impl
+        * Holds the common metric data
+        * Stores into the Glean storage
+    * Store impl
+        * Simple wrapper around value
+        * Implements category and JSON serialization
+* Storage: `Metric` enum wrapping the Metric type
     * Impl
         * [Metric](src/metrics/mod.rs)
     * List of all stored metric types
-    * Lists every category as a string
-    * Handles serialization into JSON
-    * Deserialization made easy: deserialize byte blob into `Metric` enum.
-
+    * Defers category to metric type (always the same)
+    * Defers JSON serialization to metric type (always the same)
+    * No additional logic required
     
 Advantage:
 
-* Simple serialization/deserialization into storage
+* Simple serialization/deserialization into storage (same as before)
     * All handled by `bincode` for us
-* Easy serialization into JSON
+* Easy serialization into JSON (same as before)
     * Iterate over everything and it tells us what it is
 
     
 Disadvantage:
 
-* Separate files for recording & JSON-serialization
-    * Always need to add logic to 2 files when adding new type
+* Still 2 files to modify when adding new type
+    * but logic only in one file
