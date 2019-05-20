@@ -5,5 +5,9 @@ fn main() {
     let counter = CounterMetric::new();
 
     counter.add(&glean, 1);
+
+    let created = DateTimeMetric::new(TimeUnit::Day);
+    created.set(&glean);
+
     println!("Snapshot: {}", glean.snapshot());
 }
