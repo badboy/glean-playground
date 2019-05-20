@@ -6,8 +6,10 @@ use serde_json::Value as JsonValue;
 mod metrics;
 
 pub use metrics::CounterMetric;
+pub use metrics::DateTimeMetric;
 pub use metrics::Metric;
 pub use metrics::StringMetric;
+pub use metrics::TimeUnit;
 
 #[derive(Debug)]
 pub struct Glean {
